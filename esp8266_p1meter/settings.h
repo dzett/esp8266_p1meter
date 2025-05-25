@@ -3,7 +3,7 @@
 // **********************************
 
 // Update treshold in milliseconds, messages will only be sent on this interval
-#define UPDATE_INTERVAL 60000  // 1 minute
+#define UPDATE_INTERVAL 3000  // 3 seconds
 //#define UPDATE_INTERVAL 300000 // 5 minutes
 
 // * Baud rate for both hardware and software 
@@ -21,7 +21,7 @@
 #define HOSTNAME "p1meter"
 
 // * The password used for OTA
-#define OTA_PASSWORD "admin"
+#define OTA_PASSWORD "hTq//8853&zu#"
 
 // * Wifi timeout in milliseconds
 #define WIFI_TIMEOUT 30000
