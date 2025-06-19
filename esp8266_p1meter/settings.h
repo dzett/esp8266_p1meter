@@ -3,8 +3,8 @@
 // **********************************
 
 // Update treshold in milliseconds, messages will only be sent on this interval
-#define UPDATE_INTERVAL 3000  // 3 seconds
-//#define UPDATE_INTERVAL 300000 // 5 minutes
+#define UPDATE_INTERVAL 10000  // 3 seconds
+// #define UPDATE_INTERVAL 300000 // 5 minutes
 
 // * Baud rate for both hardware and software 
 #define BAUD_RATE 115200

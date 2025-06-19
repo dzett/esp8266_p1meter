@@ -73,6 +73,7 @@ bool mqtt_reconnect()
 {
     // * Loop until we're reconnected
     int MQTT_RECONNECT_RETRIES = 0;
+    String lwt = String(MQTT_ROOT_TOPIC) + "/lwt";
 
     while (!mqtt_client.connected() && MQTT_RECONNECT_RETRIES < MQTT_MAX_RECONNECT_TRIES)
     {
@@ -80,15 +81,15 @@ bool mqtt_reconnect()
         Serial.printf("MQTT connection attempt %d / %d ...\n", MQTT_RECONNECT_RETRIES, MQTT_MAX_RECONNECT_TRIES);
 
         // * Attempt to connect
-        if (mqtt_client.connect(HOSTNAME, MQTT_USER, MQTT_PASS))
+        if (mqtt_client.connect(HOSTNAME, MQTT_USER, MQTT_PASS, lwt.c_str(), 1, true, "p1 meter OFFLINE"))
         {
             Serial.println(F("MQTT connected!"));
 
             // * Once connected, publish an announcement...
-            char *message = new char[16 + strlen(HOSTNAME) + 1];
+            /* char *message = new char[16 + strlen(HOSTNAME) + 1];
             strcpy(message, "p1 meter alive: ");
-            strcat(message, HOSTNAME);
-            mqtt_client.publish("hass/status", message);
+            //strcat(message, HOSTNAME);*/
+            mqtt_client.publish(lwt.c_str(), "p1 meter ONLINE");
 
             Serial.printf("MQTT root topic: %s\n", MQTT_ROOT_TOPIC);
         }
@@ -672,6 +673,7 @@ void loop()
     ArduinoOTA.handle();
     long now = millis();
 
+    
     if (!mqtt_client.connected())
     {
         if (now - LAST_RECONNECT_ATTEMPT > 5000)
